@@ -12,8 +12,11 @@ namespace Bueno_Bookings
 {
     public partial class Booking : Form
     {
-        public Booking()
+        MainMenuForm parentForm;
+
+        public Booking(MainMenuForm p)
         {
+            parentForm = p;
             InitializeComponent();
         }
     }

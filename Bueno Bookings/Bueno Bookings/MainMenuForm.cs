@@ -14,7 +14,7 @@ namespace Bueno_Bookings
     {
         private Guests frmGuests;
         private Rooms frmRooms;
-        
+        private Booking frmBooking;
 
         public MainMenuForm()
         {
@@ -106,6 +106,16 @@ namespace Bueno_Bookings
                 }
 
                 OpenForm(frmRooms);
+            }
+
+            if (stripItem.Name == "mnuBooking" || stripItem.Name == "tsbBooking")
+            {
+                if (frmBooking == null || frmBooking.IsDisposed)
+                {
+                    frmBooking = new Booking(this);
+                }
+
+                OpenForm(frmBooking);
             }
         }
 

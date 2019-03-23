@@ -1,0 +1,16 @@
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\bin\Debug\Bueno Bookings.exe.config
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\bin\Debug\Bueno Bookings.exe
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\bin\Debug\Bueno Bookings.pdb
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\bin\Debug\MdiTabControl.dll
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\obj\Debug\Bueno Bookings.csprojAssemblyReference.cache
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\obj\Debug\Bueno_Bookings.Rooms.resources
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\obj\Debug\Bueno_Bookings.Guests.resources
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\obj\Debug\Bueno_Bookings.MainMenuForm.resources
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\obj\Debug\Bueno_Bookings.Properties.Resources.resources
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\obj\Debug\Bueno_Bookings.Login.resources
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\obj\Debug\Bueno_Bookings.Splash.resources
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\obj\Debug\Bueno Bookings.csproj.GenerateResource.cache
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\obj\Debug\Bueno Bookings.csproj.CoreCompileInputs.cache
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\obj\Debug\Bueno Bookings.csproj.CopyComplete
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\obj\Debug\Bueno Bookings.exe
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\obj\Debug\Bueno Bookings.pdb

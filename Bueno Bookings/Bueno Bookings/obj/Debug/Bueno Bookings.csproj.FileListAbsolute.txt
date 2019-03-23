@@ -14,3 +14,4 @@ D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Boo
 D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\obj\Debug\Bueno Bookings.csproj.CopyComplete
 D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\obj\Debug\Bueno Bookings.exe
 D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\obj\Debug\Bueno Bookings.pdb
+D:\WMAD Winter 2019\Database Programming\Bueno Bookings\Bueno Bookings\Bueno Bookings\obj\Debug\Bueno_Bookings.Booking.resources

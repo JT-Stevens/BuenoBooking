@@ -69,17 +69,14 @@ namespace Bueno_Bookings
 
             if (dtRoom.Rows.Count > 0)
             {
-                //currentRoomId = Convert.ToInt32(dtRoom.Rows[selectedRoomId]["roomId"].ToString());
 
                 cboHotel.SelectedValue = dtRoom.Rows[currentRecord]["hotel"].ToString();
                 txtRoomNumber.Text = dtRoom.Rows[currentRecord]["roomNumber"].ToString();
                 cboRoomType.Text = dtRoom.Rows[currentRecord]["roomType"].ToString();
-                txtRate.Text = dtRoom.Rows[currentRecord]["rate"].ToString();
-                txtParkingRate.Text = dtRoom.Rows[currentRecord]["parkingRate"].ToString();
+                txtRate.Text = (Convert.ToDouble(dtRoom.Rows[currentRecord]["rate"]).ToString("N2"));
+                txtParkingRate.Text = (Convert.ToDouble(dtRoom.Rows[currentRecord]["parkingRate"])).ToString("N2");
 
                 parentForm.toolStripStatusLabel3.Text = $"Position: {currentRecord + 1} of {dtRoom.Rows.Count}";
-                //gpBoxNavButton.Enabled = true;
-                //AddMode = false;
             }
         }
 
@@ -286,6 +283,7 @@ namespace Bueno_Bookings
 
         #endregion
 
+        #region Entry Validation
         private void ControlValidation(object sender, CancelEventArgs e)
         {
             //Loop through all the controls 
@@ -327,7 +325,7 @@ namespace Bueno_Bookings
                 }
             }
             //Insure that the currency text fields are put in currency format
-            if (!Regex.IsMatch(txtParkingRate.Text, "^([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$)"))
+            if (!Regex.IsMatch(txtParkingRate.Text, "^([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$"))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtParkingRate, "Please put in currency format");
@@ -337,7 +335,7 @@ namespace Bueno_Bookings
                 errorProvider1.SetError(txtParkingRate, "");
             }
 
-            if (!Regex.IsMatch(txtRate.Text, "^([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$)"))
+            if (!Regex.IsMatch(txtRate.Text, "^([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$"))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtRate, "Please put in currency format");
@@ -352,6 +350,8 @@ namespace Bueno_Bookings
         {
             e.Cancel = false;
         }
+
+        #endregion
 
         #region GustId Generator
         private void button1_Click(object sender, EventArgs e)

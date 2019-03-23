@@ -52,8 +52,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.grpForms = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.grpNav.SuspendLayout();
             this.grpForms.SuspendLayout();
@@ -125,7 +125,7 @@
             this.txtRoomNumber.MaxLength = 6;
             this.txtRoomNumber.Name = "txtRoomNumber";
             this.txtRoomNumber.Size = new System.Drawing.Size(184, 22);
-            this.txtRoomNumber.TabIndex = 1;
+            this.txtRoomNumber.TabIndex = 2;
             this.txtRoomNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Update_KeyPress);
             this.txtRoomNumber.Validating += new System.ComponentModel.CancelEventHandler(this.ControlValidation);
             // 
@@ -135,7 +135,7 @@
             this.cboRoomType.Location = new System.Drawing.Point(20, 178);
             this.cboRoomType.Name = "cboRoomType";
             this.cboRoomType.Size = new System.Drawing.Size(184, 24);
-            this.cboRoomType.TabIndex = 2;
+            this.cboRoomType.TabIndex = 4;
             this.cboRoomType.SelectionChangeCommitted += new System.EventHandler(this.Update_SelectionChangeCommitted);
             this.cboRoomType.Validating += new System.ComponentModel.CancelEventHandler(this.ControlValidation);
             // 
@@ -144,7 +144,7 @@
             this.txtRate.Location = new System.Drawing.Point(295, 52);
             this.txtRate.Name = "txtRate";
             this.txtRate.Size = new System.Drawing.Size(184, 22);
-            this.txtRate.TabIndex = 3;
+            this.txtRate.TabIndex = 1;
             this.txtRate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Update_KeyPress);
             this.txtRate.Validating += new System.ComponentModel.CancelEventHandler(this.ControlValidation);
             // 
@@ -153,7 +153,7 @@
             this.txtParkingRate.Location = new System.Drawing.Point(295, 118);
             this.txtParkingRate.Name = "txtParkingRate";
             this.txtParkingRate.Size = new System.Drawing.Size(184, 22);
-            this.txtParkingRate.TabIndex = 4;
+            this.txtParkingRate.TabIndex = 3;
             this.txtParkingRate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Update_KeyPress);
             this.txtParkingRate.Validating += new System.ComponentModel.CancelEventHandler(this.ControlValidation);
             // 
@@ -163,7 +163,7 @@
             this.btnSave.Location = new System.Drawing.Point(600, 319);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(128, 46);
-            this.btnSave.TabIndex = 5;
+            this.btnSave.TabIndex = 2;
             this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -174,7 +174,7 @@
             this.btnDelete.Location = new System.Drawing.Point(466, 319);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(128, 46);
-            this.btnDelete.TabIndex = 6;
+            this.btnDelete.TabIndex = 1;
             this.btnDelete.Text = "&Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -185,7 +185,7 @@
             this.btnCancel.Location = new System.Drawing.Point(734, 319);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(128, 46);
-            this.btnCancel.TabIndex = 7;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -196,7 +196,7 @@
             this.btnFirst.Location = new System.Drawing.Point(4, 11);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(64, 64);
-            this.btnFirst.TabIndex = 8;
+            this.btnFirst.TabIndex = 0;
             this.btnFirst.Text = "⏮";
             this.btnFirst.UseVisualStyleBackColor = true;
             this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
@@ -207,7 +207,7 @@
             this.btnPrevious.Location = new System.Drawing.Point(76, 11);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(64, 64);
-            this.btnPrevious.TabIndex = 9;
+            this.btnPrevious.TabIndex = 1;
             this.btnPrevious.Text = "◀";
             this.btnPrevious.UseVisualStyleBackColor = true;
             this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
@@ -218,7 +218,7 @@
             this.btnNext.Location = new System.Drawing.Point(148, 11);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(64, 64);
-            this.btnNext.TabIndex = 10;
+            this.btnNext.TabIndex = 2;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -229,7 +229,7 @@
             this.btnLast.Location = new System.Drawing.Point(220, 11);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(64, 64);
-            this.btnLast.TabIndex = 11;
+            this.btnLast.TabIndex = 3;
             this.btnLast.Text = "⏭";
             this.btnLast.UseVisualStyleBackColor = true;
             this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
@@ -245,7 +245,7 @@
             this.btnAdd.Location = new System.Drawing.Point(331, 319);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(128, 46);
-            this.btnAdd.TabIndex = 12;
+            this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "&Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAddNew_Click);
@@ -301,25 +301,27 @@
             this.grpForms.TabIndex = 16;
             this.grpForms.TabStop = false;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(277, 53);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(18, 20);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "$";
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(277, 118);
+            this.label8.Location = new System.Drawing.Point(272, 118);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(18, 20);
             this.label8.TabIndex = 8;
             this.label8.Text = "$";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(272, 53);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(18, 20);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "$";
             // 
             // Rooms
             // 

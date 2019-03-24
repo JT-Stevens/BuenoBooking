@@ -41,28 +41,28 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblTotalCharges = new System.Windows.Forms.Label();
             this.chkPreferred = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
+            this.cboRoomType = new System.Windows.Forms.ComboBox();
+            this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
+            this.txtLastName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtFirstName = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAddGuest = new System.Windows.Forms.Button();
             this.txtPhone = new System.Windows.Forms.MaskedTextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cboGuestId = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cboHotel = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.cboRoomNumber = new System.Windows.Forms.ComboBox();
             this.grpNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -169,16 +169,16 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.comboBox4);
+            this.groupBox1.Controls.Add(this.cboRoomNumber);
             this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.comboBox3);
+            this.groupBox1.Controls.Add(this.cboHotel);
             this.groupBox1.Controls.Add(this.chkPreferred);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.dateTimePicker3);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.dateTimePicker1);
+            this.groupBox1.Controls.Add(this.dtpEndDate);
+            this.groupBox1.Controls.Add(this.cboRoomType);
+            this.groupBox1.Controls.Add(this.dtpStartDate);
             this.groupBox1.Location = new System.Drawing.Point(60, 44);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(499, 213);
@@ -195,14 +195,14 @@
             this.label6.TabIndex = 21;
             this.label6.Text = "Total Charges";
             // 
-            // label5
+            // lblTotalCharges
             // 
-            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(648, 288);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(184, 22);
-            this.label5.TabIndex = 20;
+            this.lblTotalCharges.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblTotalCharges.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalCharges.Location = new System.Drawing.Point(648, 288);
+            this.lblTotalCharges.Name = "lblTotalCharges";
+            this.lblTotalCharges.Size = new System.Drawing.Size(184, 22);
+            this.lblTotalCharges.TabIndex = 20;
             // 
             // chkPreferred
             // 
@@ -245,42 +245,41 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Start Date";
             // 
-            // dateTimePicker3
+            // dtpEndDate
             // 
-            this.dateTimePicker3.CustomFormat = "dddd MMM dd, yy ";
-            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker3.Location = new System.Drawing.Point(271, 71);
-            this.dateTimePicker3.MinDate = new System.DateTime(2019, 3, 23, 0, 0, 0, 0);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(190, 22);
-            this.dateTimePicker3.TabIndex = 3;
+            this.dtpEndDate.CustomFormat = "dddd MMM dd, yy ";
+            this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpEndDate.Location = new System.Drawing.Point(271, 71);
+            this.dtpEndDate.Name = "dtpEndDate";
+            this.dtpEndDate.Size = new System.Drawing.Size(190, 22);
+            this.dtpEndDate.TabIndex = 3;
             // 
-            // comboBox1
+            // cboRoomType
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(173, 130);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(144, 24);
-            this.comboBox1.TabIndex = 2;
+            this.cboRoomType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRoomType.FormattingEnabled = true;
+            this.cboRoomType.Location = new System.Drawing.Point(173, 130);
+            this.cboRoomType.Name = "cboRoomType";
+            this.cboRoomType.Size = new System.Drawing.Size(144, 24);
+            this.cboRoomType.TabIndex = 2;
             // 
-            // dateTimePicker1
+            // dtpStartDate
             // 
-            this.dateTimePicker1.CustomFormat = "dddd MMM dd, yy ";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(10, 71);
-            this.dateTimePicker1.MinDate = new System.DateTime(2019, 3, 23, 0, 0, 0, 0);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(190, 22);
-            this.dateTimePicker1.TabIndex = 0;
+            this.dtpStartDate.CustomFormat = "dddd MMM dd, yy ";
+            this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpStartDate.Location = new System.Drawing.Point(10, 71);
+            this.dtpStartDate.Name = "dtpStartDate";
+            this.dtpStartDate.Size = new System.Drawing.Size(190, 22);
+            this.dtpStartDate.TabIndex = 0;
             // 
-            // textBox1
+            // txtLastName
             // 
-            this.textBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox1.Location = new System.Drawing.Point(30, 132);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(184, 22);
-            this.textBox1.TabIndex = 4;
+            this.txtLastName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtLastName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtLastName.Location = new System.Drawing.Point(30, 132);
+            this.txtLastName.Name = "txtLastName";
+            this.txtLastName.Size = new System.Drawing.Size(184, 22);
+            this.txtLastName.TabIndex = 4;
             // 
             // label4
             // 
@@ -302,41 +301,41 @@
             this.label7.TabIndex = 23;
             this.label7.Text = "First Name";
             // 
-            // textBox2
+            // txtFirstName
             // 
-            this.textBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox2.Location = new System.Drawing.Point(291, 132);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(184, 22);
-            this.textBox2.TabIndex = 22;
+            this.txtFirstName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtFirstName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtFirstName.Location = new System.Drawing.Point(291, 132);
+            this.txtFirstName.Name = "txtFirstName";
+            this.txtFirstName.Size = new System.Drawing.Size(184, 22);
+            this.txtFirstName.TabIndex = 22;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.btnAddGuest);
             this.groupBox2.Controls.Add(this.txtPhone);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.comboBox2);
+            this.groupBox2.Controls.Add(this.cboGuestId);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Controls.Add(this.textBox2);
+            this.groupBox2.Controls.Add(this.txtLastName);
+            this.groupBox2.Controls.Add(this.txtFirstName);
             this.groupBox2.Location = new System.Drawing.Point(618, 44);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(530, 213);
             this.groupBox2.TabIndex = 22;
             this.groupBox2.TabStop = false;
             // 
-            // button1
+            // btnAddGuest
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.button1.Location = new System.Drawing.Point(291, 36);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(184, 59);
-            this.button1.TabIndex = 33;
-            this.button1.Text = "This guest is not in our list. Add to list?";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAddGuest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btnAddGuest.Location = new System.Drawing.Point(291, 36);
+            this.btnAddGuest.Name = "btnAddGuest";
+            this.btnAddGuest.Size = new System.Drawing.Size(184, 59);
+            this.btnAddGuest.TabIndex = 33;
+            this.btnAddGuest.Text = "This guest is not in our list. Add to list?";
+            this.btnAddGuest.UseVisualStyleBackColor = true;
             // 
             // txtPhone
             // 
@@ -366,14 +365,14 @@
             this.label8.TabIndex = 22;
             this.label8.Text = "GuestID";
             // 
-            // comboBox2
+            // cboGuestId
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(30, 71);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(184, 24);
-            this.comboBox2.TabIndex = 24;
+            this.cboGuestId.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboGuestId.FormattingEnabled = true;
+            this.cboGuestId.Location = new System.Drawing.Point(30, 71);
+            this.cboGuestId.Name = "cboGuestId";
+            this.cboGuestId.Size = new System.Drawing.Size(184, 24);
+            this.cboGuestId.TabIndex = 24;
             // 
             // label10
             // 
@@ -385,13 +384,14 @@
             this.label10.TabIndex = 21;
             this.label10.Text = "Hotel";
             // 
-            // comboBox3
+            // cboHotel
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(10, 129);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(144, 24);
-            this.comboBox3.TabIndex = 20;
+            this.cboHotel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboHotel.FormattingEnabled = true;
+            this.cboHotel.Location = new System.Drawing.Point(10, 129);
+            this.cboHotel.Name = "cboHotel";
+            this.cboHotel.Size = new System.Drawing.Size(144, 24);
+            this.cboHotel.TabIndex = 20;
             // 
             // label11
             // 
@@ -403,13 +403,14 @@
             this.label11.TabIndex = 23;
             this.label11.Text = "Room Number";
             // 
-            // comboBox4
+            // cboRoomNumber
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(336, 130);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(144, 24);
-            this.comboBox4.TabIndex = 22;
+            this.cboRoomNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRoomNumber.FormattingEnabled = true;
+            this.cboRoomNumber.Location = new System.Drawing.Point(336, 130);
+            this.cboRoomNumber.Name = "cboRoomNumber";
+            this.cboRoomNumber.Size = new System.Drawing.Size(144, 24);
+            this.cboRoomNumber.TabIndex = 22;
             // 
             // Booking
             // 
@@ -417,7 +418,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1208, 526);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblTotalCharges);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpNav);
@@ -452,28 +453,28 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.DateTimePicker dtpStartDate;
+        private System.Windows.Forms.ComboBox cboRoomType;
+        private System.Windows.Forms.DateTimePicker dtpEndDate;
+        private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblTotalCharges;
         private System.Windows.Forms.CheckBox chkPreferred;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cboGuestId;
+        private System.Windows.Forms.Button btnAddGuest;
         private System.Windows.Forms.MaskedTextBox txtPhone;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox cboRoomNumber;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox cboHotel;
     }
 }

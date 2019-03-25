@@ -49,7 +49,8 @@ namespace Bueno_Bookings
                 cboHotel.SelectedIndex = currentRecord;
 
                 //GuestId ComboBox
-                dtGuest = GetSendData.GetData($"SELECT Guest.GuestId, FirstName, LastName, Phone FROM Guest INNER JOIN booking ON guest.GuestID = Booking.GuestID  WHERE BookingId = {dtBooking.Rows[currentRecord]["BookingID"]}");
+                //dtGuest = GetSendData.GetData($"SELECT Guest.GuestId, FirstName, LastName, Phone FROM Guest INNER JOIN booking ON guest.GuestID = Booking.GuestID  WHERE BookingId = {dtBooking.Rows[currentRecord]["BookingID"]}");
+                dtGuest = GetSendData.GetData($"SELECT GuestId, FirstName, LastName, Phone FROM Guest");
 
                 cboGuestId.DisplayMember = "GuestID";
                 cboGuestId.ValueMember = "GuestID";
@@ -97,8 +98,9 @@ namespace Bueno_Bookings
         {
             if (dtBooking.Rows.Count > 0)
             {
-                //This messy code is here so we can have the index of the current Hotel due to it not being directly linked to dtBooking
+                //This messy code is here so we can have the index of the current Hotel then Guest to make sure the records are matched.
                 int HotelCurrentIndex = dtRoom.Rows.IndexOf(dtRoom.Select($"RoomId = {dtBooking.Rows[currentRecord]["RoomID"]}")[0]) + 1;
+                int GuestCurrentIndex = dtGuest.Rows.IndexOf(dtGuest.Select($"GuestID = '{dtBooking.Rows[currentRecord]["GuestID"]}'")[0]);
 
                 dtpStartDate.Value = Convert.ToDateTime(dtBooking.Rows[currentRecord]["StartDate"]);
                 dtpEndDate.Value = Convert.ToDateTime(dtBooking.Rows[currentRecord]["EndDate"]);
@@ -108,12 +110,16 @@ namespace Bueno_Bookings
                 cboRoomType.SelectedValue = dtBooking.Rows[currentRecord]["RoomID"];
                 cboRoomNumber.SelectedValue = dtBooking.Rows[currentRecord]["RoomID"];
 
-                txtLastName.Text = dtGuest.Rows[currentRecord]["LastName"].ToString();  
-                txtFirstName.Text = dtGuest.Rows[currentRecord]["FirstName"].ToString();
-                txtPhone.Text = dtGuest.Rows[currentRecord]["phone"].ToString();    
+                cboGuestId.SelectedValue = dtBooking.Rows[currentRecord]["GuestID"];
+
+
+                txtFirstName.Text = dtGuest.Rows[GuestCurrentIndex]["FirstName"].ToString();
+                txtLastName.Text = dtGuest.Rows[GuestCurrentIndex]["LastName"].ToString();
+                txtPhone.Text = dtGuest.Rows[GuestCurrentIndex]["Phone"].ToString();
+
+                lblTotalCharges.Text = dtBooking.Rows[currentRecord]["TotalCharge"].ToString();
             }
         }
-
 
         private void ToggleControls(bool state)
         {
@@ -124,9 +130,46 @@ namespace Bueno_Bookings
             grpNav.Enabled = state;
         }
 
-
         #endregion
 
+        #region Navagation
+
+        private void btnFirst_Click(object sender, EventArgs e)
+        {
+            if (currentRecord != 0)
+            {
+                currentRecord = 0;
+                PopulateField();
+            }
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            if (currentRecord != 0)
+            {
+                currentRecord--;
+                PopulateField();
+            }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            if (currentRecord < dtBooking.Rows.Count - 1)
+            {
+                currentRecord++;
+                PopulateField();
+            }
+        }
+
+        private void btnLast_Click(object sender, EventArgs e)
+        {
+            if (currentRecord != dtBooking.Rows.Count - 1)
+            {
+                currentRecord = dtBooking.Rows.Count - 1;
+                PopulateField();
+            }
+        }
+        #endregion
 
     }
 }

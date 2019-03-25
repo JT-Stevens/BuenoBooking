@@ -40,8 +40,10 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.lblTotalCharges = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cboRoomNumber = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cboHotel = new System.Windows.Forms.ComboBox();
             this.chkPreferred = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,6 +51,8 @@
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.cboRoomType = new System.Windows.Forms.ComboBox();
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblTotalCharges = new System.Windows.Forms.Label();
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -59,10 +63,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.cboGuestId = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.cboHotel = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cboRoomNumber = new System.Windows.Forms.ComboBox();
             this.grpNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -90,6 +90,7 @@
             this.btnFirst.TabIndex = 8;
             this.btnFirst.Text = "⏮";
             this.btnFirst.UseVisualStyleBackColor = true;
+            this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
             // 
             // btnPrevious
             // 
@@ -100,6 +101,7 @@
             this.btnPrevious.TabIndex = 9;
             this.btnPrevious.Text = "◀";
             this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
             // btnLast
             // 
@@ -110,6 +112,7 @@
             this.btnLast.TabIndex = 11;
             this.btnLast.Text = "⏭";
             this.btnLast.UseVisualStyleBackColor = true;
+            this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
             // 
             // btnNext
             // 
@@ -120,6 +123,7 @@
             this.btnNext.TabIndex = 10;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnAdd
             // 
@@ -185,24 +189,43 @@
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             // 
-            // label6
+            // label11
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(644, 265);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(140, 20);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "Total Charges";
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold);
+            this.label11.Location = new System.Drawing.Point(335, 107);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(145, 20);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "Room Number";
             // 
-            // lblTotalCharges
+            // cboRoomNumber
             // 
-            this.lblTotalCharges.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblTotalCharges.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalCharges.Location = new System.Drawing.Point(648, 288);
-            this.lblTotalCharges.Name = "lblTotalCharges";
-            this.lblTotalCharges.Size = new System.Drawing.Size(184, 22);
-            this.lblTotalCharges.TabIndex = 20;
+            this.cboRoomNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRoomNumber.FormattingEnabled = true;
+            this.cboRoomNumber.Location = new System.Drawing.Point(336, 130);
+            this.cboRoomNumber.Name = "cboRoomNumber";
+            this.cboRoomNumber.Size = new System.Drawing.Size(144, 24);
+            this.cboRoomNumber.TabIndex = 22;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold);
+            this.label10.Location = new System.Drawing.Point(6, 106);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(60, 20);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "Hotel";
+            // 
+            // cboHotel
+            // 
+            this.cboHotel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboHotel.FormattingEnabled = true;
+            this.cboHotel.Location = new System.Drawing.Point(10, 129);
+            this.cboHotel.Name = "cboHotel";
+            this.cboHotel.Size = new System.Drawing.Size(144, 24);
+            this.cboHotel.TabIndex = 20;
             // 
             // chkPreferred
             // 
@@ -247,7 +270,7 @@
             // 
             // dtpEndDate
             // 
-            this.dtpEndDate.CustomFormat = "dddd MMM dd, yy ";
+            this.dtpEndDate.CustomFormat = "ddd MMM dd, yy ";
             this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpEndDate.Location = new System.Drawing.Point(271, 71);
             this.dtpEndDate.Name = "dtpEndDate";
@@ -265,12 +288,31 @@
             // 
             // dtpStartDate
             // 
-            this.dtpStartDate.CustomFormat = "dddd MMM dd, yy ";
+            this.dtpStartDate.CustomFormat = "ddd MMM dd, yy ";
             this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStartDate.Location = new System.Drawing.Point(10, 71);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(190, 22);
             this.dtpStartDate.TabIndex = 0;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold);
+            this.label6.Location = new System.Drawing.Point(644, 265);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(140, 20);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Total Charges";
+            // 
+            // lblTotalCharges
+            // 
+            this.lblTotalCharges.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblTotalCharges.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalCharges.Location = new System.Drawing.Point(648, 288);
+            this.lblTotalCharges.Name = "lblTotalCharges";
+            this.lblTotalCharges.Size = new System.Drawing.Size(184, 22);
+            this.lblTotalCharges.TabIndex = 20;
             // 
             // txtLastName
             // 
@@ -373,44 +415,6 @@
             this.cboGuestId.Name = "cboGuestId";
             this.cboGuestId.Size = new System.Drawing.Size(184, 24);
             this.cboGuestId.TabIndex = 24;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold);
-            this.label10.Location = new System.Drawing.Point(6, 106);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(60, 20);
-            this.label10.TabIndex = 21;
-            this.label10.Text = "Hotel";
-            // 
-            // cboHotel
-            // 
-            this.cboHotel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboHotel.FormattingEnabled = true;
-            this.cboHotel.Location = new System.Drawing.Point(10, 129);
-            this.cboHotel.Name = "cboHotel";
-            this.cboHotel.Size = new System.Drawing.Size(144, 24);
-            this.cboHotel.TabIndex = 20;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold);
-            this.label11.Location = new System.Drawing.Point(335, 107);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(145, 20);
-            this.label11.TabIndex = 23;
-            this.label11.Text = "Room Number";
-            // 
-            // cboRoomNumber
-            // 
-            this.cboRoomNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboRoomNumber.FormattingEnabled = true;
-            this.cboRoomNumber.Location = new System.Drawing.Point(336, 130);
-            this.cboRoomNumber.Name = "cboRoomNumber";
-            this.cboRoomNumber.Size = new System.Drawing.Size(144, 24);
-            this.cboRoomNumber.TabIndex = 22;
             // 
             // Booking
             // 

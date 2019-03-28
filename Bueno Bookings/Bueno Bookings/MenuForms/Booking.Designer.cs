@@ -134,6 +134,7 @@
             this.btnAdd.TabIndex = 17;
             this.btnAdd.Text = "&Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnCancel
             // 
@@ -144,6 +145,7 @@
             this.btnCancel.TabIndex = 16;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnDelete
             // 
@@ -226,6 +228,7 @@
             this.cboHotel.Name = "cboHotel";
             this.cboHotel.Size = new System.Drawing.Size(144, 24);
             this.cboHotel.TabIndex = 20;
+            this.cboHotel.SelectionChangeCommitted += new System.EventHandler(this.HotelDateChange);
             // 
             // chkPreferred
             // 
@@ -276,6 +279,7 @@
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(190, 22);
             this.dtpEndDate.TabIndex = 3;
+            this.dtpEndDate.ValueChanged += new System.EventHandler(this.HotelDateChange);
             // 
             // cboRoomType
             // 
@@ -285,6 +289,7 @@
             this.cboRoomType.Name = "cboRoomType";
             this.cboRoomType.Size = new System.Drawing.Size(144, 24);
             this.cboRoomType.TabIndex = 2;
+            this.cboRoomType.SelectionChangeCommitted += new System.EventHandler(this.cboRoomType_SelectionChangeCommitted);
             // 
             // dtpStartDate
             // 
@@ -294,6 +299,7 @@
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(190, 22);
             this.dtpStartDate.TabIndex = 0;
+            this.dtpStartDate.ValueChanged += new System.EventHandler(this.HotelDateChange);
             // 
             // label6
             // 

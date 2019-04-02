@@ -525,8 +525,6 @@ namespace Bueno_Bookings
             {
                 TableUpdate();
             }
-
-            MessageBox.Show(cboGuestId.Text);
         }
 
         private void txtFirstName_Leave(object sender, EventArgs e)
@@ -635,6 +633,33 @@ namespace Bueno_Bookings
             else
             {
                 errorProvider1.SetError(cboGuestId, "");
+            }
+
+            //Business Rule:
+            //A booking cannot be created for the penthouse suite for a guest that has not booked with the
+            //hotel at least 2 times in the past.
+            if (cboRoomNumber.Text.ToLower() != "no room" && cboRoomType.Text.ToLower() == "penthouse suite" && cboHotel.SelectedIndex > 0 && cboGuestId.Text.ToLower() != "no guest")
+            {
+
+                var guestBookings = dtBooking.Select($"guestId = '{cboGuestId.Text}'");
+
+                int hotelCount = 0;
+
+                foreach (DataRow row in guestBookings)
+                {
+                    if (Convert.ToInt16(dtRoom.Select($"RoomId = {row["roomId"]}")[0]["Hotel"]) == Convert.ToInt16(cboHotel.SelectedValue))
+                    {
+                        hotelCount++;
+                    }
+                }
+
+                if (hotelCount < 2)
+                {
+                    e.Cancel = true;
+                    errorProvider1.SetError(cboRoomType, "Guest must have booked with us twice in the past to get Penthouse option");
+                }
+
+
             }
         }
 

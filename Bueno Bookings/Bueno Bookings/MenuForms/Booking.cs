@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Bueno_Bookings
 {
@@ -36,6 +37,8 @@ namespace Bueno_Bookings
 
                 LoadBookings();
                 PopulateField();
+
+                FillGuestSuggestions();
             }
             catch (Exception ex)
             {
@@ -60,17 +63,48 @@ namespace Bueno_Bookings
 
         private void FillGustIdDropdown()
         {
-            dtGuest = GetSendData.GetData($"SELECT GuestId, FirstName, LastName, Phone FROM Guest");
-            DataRow row = dtGuest.NewRow();
-            row["GuestId"] = "No Guest";
-            dtGuest.Rows.InsertAt(row, 0);
+            txtPhone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            string sql = string.Empty;
+            if (addMode)
+            {
+                sql = $"SELECT GuestId FROM Guest " +
+                    $"WHERE FirstName {(string.IsNullOrWhiteSpace(txtFirstName.Text) ? " IS NOT NULL" : " = '" + txtFirstName.Text + "'" )} " +
+                    $"AND LastName {(string.IsNullOrWhiteSpace(txtLastName.Text) ? " IS NOT NULL" : " = '" + txtLastName.Text + "'")} " +
+                    $"AND Phone {(string.IsNullOrWhiteSpace(txtPhone.Text) ? " IS NOT NULL" : " = '" + txtPhone.Text + "'")} ";
+            }
+            else
+            {
+                sql = "SELECT GuestId FROM Guest";
+            }
 
+            txtPhone.TextMaskFormat = MaskFormat.IncludePromptAndLiterals;
+            DataTable dtGuestDrop = GetSendData.GetData(sql);
+
+            DataRow row = dtGuestDrop.NewRow();
+            row["GuestId"] = "No Guest";
+            dtGuestDrop.Rows.InsertAt(row, 0);
 
             cboGuestId.DisplayMember = "GuestID";
             cboGuestId.ValueMember = "GuestID";
-            cboGuestId.DataSource = dtGuest;
+            cboGuestId.DataSource = dtGuestDrop;
 
             cboGuestId.SelectedIndex = currentRecord;
+
+        }
+
+        private void FillGuestSuggestions()
+        {
+            AutoCompleteStringCollection FNamesource = new AutoCompleteStringCollection();
+            FNamesource.AddRange(dtGuest.AsEnumerable().Select(r => r.Field<string>("FirstName")).ToArray());
+            //Remove null value
+            FNamesource.RemoveAt(0);
+            txtFirstName.AutoCompleteCustomSource = FNamesource;
+
+            AutoCompleteStringCollection LNameSource = new AutoCompleteStringCollection();
+            LNameSource.AddRange(dtGuest.AsEnumerable().Select(r => r.Field<string>("LastName")).ToArray());
+            //Remove null value
+            LNameSource.RemoveAt(0);
+            txtLastName.AutoCompleteCustomSource = LNameSource;
         }
 
         private void fillRoomNumberDropdown()
@@ -87,14 +121,18 @@ namespace Bueno_Bookings
             {
                 sql = $"SELECT RoomNumber FROM Room LEFT OUTER JOIN Booking " +
                     $"ON Booking.RoomID = Room.RoomID WHERE RoomType = '{cboRoomType.Text}' AND Room.RoomId NOT IN (SELECT RoomID FROM Booking " +
-                    $"WHERE StartDate <= '{dtpEndDate.Value.ToShortDateString()}' AND '{dtpStartDate.Value.ToShortDateString()}' <= EndDate);";
+                    $"WHERE StartDate <= '{dtpEndDate.Value.ToShortDateString()}' AND '{dtpStartDate.Value.ToShortDateString()}' <= EndDate) " +
+                    $"AND Hotel = {cboHotel.SelectedValue}" +
+                    $"ORDER BY RoomNumber;";
             }
             else
             {
                 sql = $"SELECT RoomNumber FROM Room LEFT OUTER JOIN Booking " +
                     $"ON Booking.RoomID = Room.RoomID WHERE RoomType = '{cboRoomType.Text}' AND Room.RoomId NOT IN (SELECT RoomID FROM Booking " +
                     $"WHERE StartDate <= '{dtpEndDate.Value.ToShortDateString()}' AND '{dtpStartDate.Value.ToShortDateString()}' <= EndDate) " +
-                    $"OR BookingId = {dtBooking.Rows[currentRecord]["BookingId"]};";
+                    $"AND Hotel = {cboHotel.SelectedValue}" +
+                    $"OR BookingId = {dtBooking.Rows[currentRecord]["BookingId"]} " +
+                    $"ORDER BY RoomNumber;";
             }
 
             DataTable dtRoomNumDrop = GetSendData.GetData(sql);
@@ -195,12 +233,12 @@ namespace Bueno_Bookings
                 int hotelNum = Convert.ToInt16(dtRoom.Select($"RoomID = {dtBooking.Rows[currentRecord]["RoomID"]}")[0]["Hotel"]);
                 cboHotel.SelectedValue = hotelNum;
 
-                FillGustIdDropdown();
                 int GuestCurrentIndex = dtGuest.Rows.IndexOf(dtGuest.Select($"GuestID = '{dtBooking.Rows[currentRecord]["GuestID"]}'")[0]);
-                cboGuestId.SelectedValue = dtBooking.Rows[currentRecord]["GuestID"];
                 txtFirstName.Text = dtGuest.Rows[GuestCurrentIndex]["FirstName"].ToString();
                 txtLastName.Text = dtGuest.Rows[GuestCurrentIndex]["LastName"].ToString();
                 txtPhone.Text = dtGuest.Rows[GuestCurrentIndex]["Phone"].ToString();
+                FillGustIdDropdown();
+                cboGuestId.SelectedValue = dtBooking.Rows[currentRecord]["GuestID"];
 
                 fillRoomTypeDropdown();
                 var roomTypeItem = dtRoom.Select($"RoomId= {dtBooking.Rows[currentRecord]["RoomID"]}")[0]["RoomType"].ToString();
@@ -231,6 +269,11 @@ namespace Bueno_Bookings
             btnSave.Enabled = !state;
             btnCancel.Enabled = !state;
             grpNav.Enabled = state;
+
+            txtFirstName.Enabled = !state;
+            txtLastName.Enabled = !state;
+            txtPhone.Enabled = !state;
+            
         }
 
         #endregion
@@ -285,7 +328,9 @@ namespace Bueno_Bookings
             fillRoomTypeDropdown();
             fillRoomNumberDropdown();
 
-            parentForm.toolStripStatusLabel3.Text = $"Position: {dtBooking.Rows.Count + 1} of {dtGuest.Rows.Count + 1}";
+            FillGustIdDropdown();
+
+            parentForm.toolStripStatusLabel3.Text = $"Position: {dtBooking.Rows.Count + 1} of {dtBooking.Rows.Count + 1}";
             parentForm.toolStripStatusLabel4.Text = "Add Record in progress...";
         }
 
@@ -297,7 +342,7 @@ namespace Bueno_Bookings
                 {
                     foreach (Control ctrl in gb.Controls)
                     {
-                        if (ctrl is TextBox || ctrl is MaskedTextBox)
+                        if (ctrl is TextBox || ctrl is MaskedTextBox || ctrl is Label)
                         {
                             ctrl.Text = string.Empty;
                         }
@@ -307,7 +352,7 @@ namespace Bueno_Bookings
                         }
                         else if (ctrl is CheckBox chk)
                         {
-                            chk.Enabled = false;
+                            chk.Checked = false;
                         }
                         else if (ctrl is DateTimePicker dtp)
                         {
@@ -316,11 +361,95 @@ namespace Bueno_Bookings
                     }
                 }
             }
+
+            lblTotalCharges.Text = string.Empty;
+
             cboRoomType.DataSource = null;
             cboRoomType.Enabled = false;
 
             cboRoomNumber.DataSource = null;
             cboRoomNumber.Enabled = false;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ValidateChildren(ValidationConstraints.Enabled))
+                {
+                    ToggleControls(true);
+                    string sql = string.Empty;
+
+                    int roomId = Convert.ToInt16(dtRoom.Select($"roomNumber = {cboRoomNumber.Text} AND roomType = '{cboRoomType.Text}' AND hotel = {cboHotel.SelectedValue}")[0]["RoomId"]);
+
+                    if (addMode)
+                    {
+                        sql = $"INSERT INTO booking VALUES (" +
+                            $"'{dtpStartDate.Value.ToShortDateString()}', " +       //Startdate
+                            $"'{dtpEndDate.Value.ToShortDateString()}'," +          //Enddate
+                            $"{roomId}, " +                                         //RoomId
+                            $"'{cboGuestId.Text}'," +                               //GuestId
+                            $"{Convert.ToByte(chkRequiredParking.Checked)}, " +     //RequiredParking
+                            $"{(lblTotalCharges.Text)});";                          //Total Charge
+                    }
+                    else //Update
+                    {
+                        sql = $"UPDATE Booking SET " +
+                            $"StartDate = '{dtpStartDate.Value.ToShortDateString()}', " +
+                            $"EndDate  = '{dtpEndDate.Value.ToShortDateString()}', " +
+                            $"RoomId = {roomId}, " +
+                            $"GuestID = '{cboGuestId.Text}', " +
+                            $"RequiredParking = {Convert.ToByte(chkRequiredParking.Checked)}, " +
+                            $"TotalCharge = {lblTotalCharges.Text} " +
+                            $"WHERE BookingID = {dtBooking.Rows[currentRecord]["GuestID"]};";
+                    }
+
+                    Debug.WriteLine($"Rows affected: {GetSendData.SendData(sql)}");
+
+                    parentForm.toolStripStatusLabel4.Text = "OK";
+
+                    LoadBookings();
+                    PopulateField();
+
+                    addMode = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this booking? " + Environment.NewLine +
+                    $"Starting:   {dtpStartDate.Value.ToLongDateString()}" + Environment.NewLine +
+                    $"Ending:    {dtpEndDate.Value.ToLongDateString()}" + Environment.NewLine +
+                    $"for hotel:  {cboHotel.Text}", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    if (GetSendData.SendData($"DELETE FROM Booking WHERE BookingId = {dtBooking.Rows[currentRecord]["BookingID"]}") > 0)
+                    {
+                        MessageBox.Show("Record Deleted");
+
+                        currentRecord = 0;
+
+                        LoadBookings();
+                        PopulateField();
+                    }
+                    else
+                    {
+                        MessageBox.Show("An error occured while saving the data.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -334,18 +463,181 @@ namespace Bueno_Bookings
 
             PopulateField();
         }
-        
+
+        private string replaceApostrophes(string text)
+        {
+            return text.Replace("'", "''").Trim();
+        }
+
+        private void TableUpdate()
+        {
+            ToggleControls(false);
+            addMode = false;
+
+            parentForm.toolStripStatusLabel4.Text = "Edit in progress...";
+        }
+
         #endregion
 
         private void HotelDateChange(object sender, EventArgs e)
         {
             fillRoomTypeDropdown();
             fillRoomNumberDropdown();
+            CalcTotal();
+
+            if (!addMode)
+            {
+                TableUpdate();
+            }
         }
 
         private void cboRoomType_SelectionChangeCommitted(object sender, EventArgs e)
         {
             fillRoomNumberDropdown();
+            CalcTotal();
+
+            if (!addMode)
+            {
+                TableUpdate();
+            }
         }
+
+        private void cboGuestId_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (cboGuestId.SelectedIndex == 0)
+            {
+                txtLastName.Text = string.Empty;
+                txtFirstName.Text = string.Empty;
+                txtPhone.Text = string.Empty;
+                btnAddGuest.Visible = true;
+            }
+            else
+            {
+                txtLastName.Text = dtGuest.Select($"GuestId = '{cboGuestId.Text}'")[0]["LastName"].ToString();
+                txtFirstName.Text = dtGuest.Select($"GuestId = '{cboGuestId.Text}'")[0]["FirstName"].ToString();
+                txtPhone.Text = dtGuest.Select($"GuestID = '{cboGuestId.Text}'")[0]["Phone"].ToString();
+                btnAddGuest.Visible = false;
+            }
+
+            CalcTotal();
+
+            if (!addMode)
+            {
+                TableUpdate();
+            }
+
+            MessageBox.Show(cboGuestId.Text);
+        }
+
+        private void txtFirstName_Leave(object sender, EventArgs e)
+        {
+            FillGustIdDropdown();
+        }
+
+        private void chkRequiredParking_Click(object sender, EventArgs e)
+        {
+            CalcTotal();
+            if (!addMode)
+            {
+                TableUpdate();
+            }
+        }
+
+        private void CalcTotal()
+        {
+            if (cboRoomNumber.Text.ToLower() != "no room" && cboRoomType.Text.ToLower() != "no room" && cboHotel.SelectedIndex > 0 && cboGuestId.Text.ToLower() != "no guest")
+            {
+                int roomId = Convert.ToInt16(dtRoom.Select($"roomNumber = {cboRoomNumber.Text} AND roomType = '{cboRoomType.Text}' AND hotel = {cboHotel.SelectedValue}")[0]["RoomId"]);
+                int rate = Convert.ToInt16(dtRoom.Select($"roomId = {roomId}")[0]["Rate"]);
+                double parking;
+
+                //If Guest is not a prefered guest
+                if (!(bool)dtGuest.Select($"GuestId = '{cboGuestId.Text}'")[0]["Preferred"]) 
+                {
+                    //Full Price parking
+                    parking = Convert.ToInt16(dtRoom.Select($"roomId = {roomId}")[0]["ParkingRate"]); 
+                }
+                else
+                {
+                    //20% discount due to prefereed status
+                    parking = (Convert.ToInt16(dtRoom.Select($"roomId = {roomId}")[0]["ParkingRate"])) * .8; 
+                }
+
+                //If parking required charge current parking price, else nothing
+                lblTotalCharges.Text = (chkRequiredParking.Checked ? parking + rate : rate).ToString("c"); 
+            }
+        }
+
+        #region Entery Validation
+        private void ControlValidation(object sender, CancelEventArgs e)
+        {
+            //Loop through all the controls 
+            //Check TextBox is not null or whitespace
+            //Check ComboBox has a valid option selected.
+            foreach (Control gp in this.Controls)
+            {
+                //The controls are in a groupbox so a nested loop is required
+                if (gp is GroupBox)
+                {
+                    foreach (Control ctrl in gp.Controls)
+                    {
+                        if (ctrl is TextBox)
+                        {
+                            if (string.IsNullOrWhiteSpace(ctrl.Text))
+                            {
+                                e.Cancel = true;
+                                errorProvider1.SetError(ctrl, "This field is required");
+                            }
+                            else
+                            {
+                                errorProvider1.SetError(ctrl, "");
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (dtpEndDate.Value <= dtpStartDate.Value)
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(dtpEndDate, "End date can not be before the start date.");
+            }
+            else
+            {
+                errorProvider1.SetError(dtpEndDate, "");
+            }
+
+            if (cboRoomType.Text.ToLower() == "no room")
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(cboRoomType, "This field is required");
+            }
+            else
+            {
+                errorProvider1.SetError(cboRoomType, "");
+            }
+
+            if (cboRoomNumber.Text.ToLower() == "no room")
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(cboRoomNumber, "This field is required");
+            }
+            else
+            {
+                errorProvider1.SetError(cboRoomNumber, "");
+            }
+
+            if (cboGuestId.Text.ToLower() == "no guest")
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(cboGuestId, "This field is required");
+            }
+            else
+            {
+                errorProvider1.SetError(cboGuestId, "");
+            }
+        }
+
+        #endregion
     }
 }

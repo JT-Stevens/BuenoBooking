@@ -40,6 +40,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkRequiredParking = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.cboRoomNumber = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -156,6 +157,7 @@
             this.btnDelete.TabIndex = 15;
             this.btnDelete.Text = "&Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnSave
             // 
@@ -166,6 +168,7 @@
             this.btnSave.TabIndex = 14;
             this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // errorProvider1
             // 
@@ -174,6 +177,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkRequiredParking);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.cboRoomNumber);
             this.groupBox1.Controls.Add(this.label10);
@@ -190,6 +194,19 @@
             this.groupBox1.Size = new System.Drawing.Size(499, 213);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
+            // 
+            // chkRequiredParking
+            // 
+            this.chkRequiredParking.AutoSize = true;
+            this.chkRequiredParking.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkRequiredParking.Location = new System.Drawing.Point(10, 173);
+            this.chkRequiredParking.Name = "chkRequiredParking";
+            this.chkRequiredParking.Size = new System.Drawing.Size(194, 24);
+            this.chkRequiredParking.TabIndex = 23;
+            this.chkRequiredParking.Text = "Parking Required";
+            this.chkRequiredParking.UseVisualStyleBackColor = true;
+            this.chkRequiredParking.Click += new System.EventHandler(this.chkRequiredParking_Click);
+            this.chkRequiredParking.Validating += new System.ComponentModel.CancelEventHandler(this.ControlValidation);
             // 
             // label11
             // 
@@ -209,6 +226,8 @@
             this.cboRoomNumber.Name = "cboRoomNumber";
             this.cboRoomNumber.Size = new System.Drawing.Size(144, 24);
             this.cboRoomNumber.TabIndex = 22;
+            this.cboRoomNumber.SelectionChangeCommitted += new System.EventHandler(this.chkRequiredParking_Click);
+            this.cboRoomNumber.Validating += new System.ComponentModel.CancelEventHandler(this.ControlValidation);
             // 
             // label10
             // 
@@ -229,6 +248,7 @@
             this.cboHotel.Size = new System.Drawing.Size(144, 24);
             this.cboHotel.TabIndex = 20;
             this.cboHotel.SelectionChangeCommitted += new System.EventHandler(this.HotelDateChange);
+            this.cboHotel.Validating += new System.ComponentModel.CancelEventHandler(this.ControlValidation);
             // 
             // chkPreferred
             // 
@@ -280,6 +300,7 @@
             this.dtpEndDate.Size = new System.Drawing.Size(190, 22);
             this.dtpEndDate.TabIndex = 3;
             this.dtpEndDate.ValueChanged += new System.EventHandler(this.HotelDateChange);
+            this.dtpEndDate.Validating += new System.ComponentModel.CancelEventHandler(this.ControlValidation);
             // 
             // cboRoomType
             // 
@@ -290,6 +311,7 @@
             this.cboRoomType.Size = new System.Drawing.Size(144, 24);
             this.cboRoomType.TabIndex = 2;
             this.cboRoomType.SelectionChangeCommitted += new System.EventHandler(this.cboRoomType_SelectionChangeCommitted);
+            this.cboRoomType.Validating += new System.ComponentModel.CancelEventHandler(this.ControlValidation);
             // 
             // dtpStartDate
             // 
@@ -324,10 +346,13 @@
             // 
             this.txtLastName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txtLastName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtLastName.Enabled = false;
             this.txtLastName.Location = new System.Drawing.Point(30, 132);
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(184, 22);
             this.txtLastName.TabIndex = 4;
+            this.txtLastName.Leave += new System.EventHandler(this.txtFirstName_Leave);
+            this.txtLastName.Validating += new System.ComponentModel.CancelEventHandler(this.ControlValidation);
             // 
             // label4
             // 
@@ -353,10 +378,13 @@
             // 
             this.txtFirstName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txtFirstName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtFirstName.Enabled = false;
             this.txtFirstName.Location = new System.Drawing.Point(291, 132);
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(184, 22);
             this.txtFirstName.TabIndex = 22;
+            this.txtFirstName.Leave += new System.EventHandler(this.txtFirstName_Leave);
+            this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.ControlValidation);
             // 
             // groupBox2
             // 
@@ -384,14 +412,18 @@
             this.btnAddGuest.TabIndex = 33;
             this.btnAddGuest.Text = "This guest is not in our list. Add to list?";
             this.btnAddGuest.UseVisualStyleBackColor = true;
+            this.btnAddGuest.Visible = false;
             // 
             // txtPhone
             // 
+            this.txtPhone.Enabled = false;
             this.txtPhone.Location = new System.Drawing.Point(30, 185);
             this.txtPhone.Mask = "(000)000-0000";
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(99, 22);
             this.txtPhone.TabIndex = 32;
+            this.txtPhone.Leave += new System.EventHandler(this.txtFirstName_Leave);
+            this.txtPhone.Validating += new System.ComponentModel.CancelEventHandler(this.ControlValidation);
             // 
             // label9
             // 
@@ -421,11 +453,14 @@
             this.cboGuestId.Name = "cboGuestId";
             this.cboGuestId.Size = new System.Drawing.Size(184, 24);
             this.cboGuestId.TabIndex = 24;
+            this.cboGuestId.SelectionChangeCommitted += new System.EventHandler(this.cboGuestId_SelectionChangeCommitted);
+            this.cboGuestId.Validating += new System.ComponentModel.CancelEventHandler(this.ControlValidation);
             // 
             // Booking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1208, 526);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lblTotalCharges);
@@ -486,5 +521,6 @@
         private System.Windows.Forms.ComboBox cboRoomNumber;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox cboHotel;
+        private System.Windows.Forms.CheckBox chkRequiredParking;
     }
 }

@@ -35,11 +35,15 @@ namespace Bueno_Bookings
             string[] roomType = { "Select a room type", "Penthouse suite", "king", "2 queen", "2 double", "queen", "double" };
 
             cboRoomType.Items.AddRange(roomType);
-
+            LoadRoom();
             cboRoomType.SelectedIndex = 0;
-            dtRoom = GetSendData.GetData("SELECT * FROM room ORDER BY roomNumber ASC");
             LoadComboHotel();
             PopulateField();
+        }
+
+        private void LoadRoom()
+        {
+            dtRoom = GetSendData.GetData("SELECT * FROM room ORDER BY roomNumber ASC");
         }
 
         private void LoadComboHotel()
@@ -134,6 +138,8 @@ namespace Bueno_Bookings
             addMode = true;
             ToggleControls(false);
 
+            ClearForm();
+
             parentForm.toolStripStatusLabel3.Text = $"Position: {dtRoom.Rows.Count + 1} of {dtRoom.Rows.Count + 1}";
             parentForm.toolStripStatusLabel4.Text = "Add Record in progress...";
         }
@@ -158,7 +164,7 @@ namespace Bueno_Bookings
                         else if (ctrl is CheckBox)
                         {
                             CheckBox chk = (CheckBox)ctrl;
-                            chk.Enabled = false;
+                            chk.Checked = false;
                         }
                     }
                 }
@@ -184,6 +190,7 @@ namespace Bueno_Bookings
                 if (ValidateChildren(ValidationConstraints.Enabled))
                 {
                     string sql = "";
+                    ToggleControls(true);
                     if (addMode)
                     {
                         sql = "INSERT INTO Room VALUES(" +
@@ -206,10 +213,13 @@ namespace Bueno_Bookings
 
                     Debug.WriteLine($"Rows affected: {GetSendData.SendData(sql)}");
 
-                    LoadComboHotel();
+                    //LoadComboHotel();
+                    LoadRoom();
                     PopulateField();
 
                     addMode = false;
+
+                    parentForm.toolStripStatusLabel4.Text = "OK";
                 }
                 else
                 {
@@ -231,13 +241,14 @@ namespace Bueno_Bookings
 
                 if (dialogResult == DialogResult.Yes)
                 {
-                    if (GetSendData.SendData($"DELTE FROM Room WHERE RoomId = {dtRoom.Rows[currentRecord]["RoomID"]}") > 0)
+                    if (GetSendData.SendData($"DELETE FROM Room WHERE RoomId = {dtRoom.Rows[currentRecord]["RoomID"]}") > 0)
                     {
                         MessageBox.Show("Record Deleted");
 
                         currentRecord = 0;
 
-                        LoadComboHotel();
+                        LoadRoom();
+                        //LoadComboHotel();
                         PopulateField();
                     }
                     else
@@ -324,6 +335,15 @@ namespace Bueno_Bookings
                     }
                 }
             }
+            if (!string.IsNullOrWhiteSpace(txtRoomNumber.Text) && cboHotel.SelectedIndex > 0)
+            {
+                if (dtRoom.Select($"RoomNumber = {txtRoomNumber.Text} AND hotel = {cboHotel.SelectedValue}").Length > 0)
+                {
+                    e.Cancel = true;
+                    errorProvider1.SetError(txtRoomNumber, "Room number already exist in hotel.");
+                }
+            }
+
             //Insure that the currency text fields are put in currency format
             if (!Regex.IsMatch(txtParkingRate.Text, "^([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$"))
             {

@@ -160,7 +160,7 @@ namespace Bueno_Bookings
                         else if (ctrl is CheckBox)
                         {
                             CheckBox chk = (CheckBox)ctrl;
-                            chk.Enabled = false;
+                            chk.Checked = false;
                         }
                     }
                 }
@@ -227,6 +227,7 @@ namespace Bueno_Bookings
                     PopulateField();
 
                     addMode = false;
+                    parentForm.toolStripStatusLabel4.Text = "OK";
                 }
                 else
                 {
@@ -282,12 +283,16 @@ namespace Bueno_Bookings
             idBuild.Append(alphabet[random.Next(0, alphabet.Length)]);
             idBuild.Append(alphabet[random.Next(0, alphabet.Length)]);
             idBuild.Append(random.Next(1000000).ToString("0000000"));
-            
 
-            if (Convert.ToInt16(GetSendData.GetScalarValue($"SELECT COUNT(*) FROM Guest WHERE GuestId = '{idBuild}'")) == 0)
+
+            if (dtGuest.Select($"GuestId = '{idBuild}'").Length == 0)
             {
                 return idBuild.ToString();
             }
+
+            //if (Convert.ToInt16(GetSendData.GetScalarValue($"SELECT COUNT(*) FROM Guest WHERE GuestId = '{idBuild}'")) == 0)
+            //{
+            //}
 
             return generateGuestId();
         }
@@ -412,9 +417,6 @@ namespace Bueno_Bookings
         {
             e.Cancel = false;
         }
-
         #endregion
-
-
     }
 }

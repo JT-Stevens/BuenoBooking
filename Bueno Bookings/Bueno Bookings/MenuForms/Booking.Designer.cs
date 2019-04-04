@@ -348,6 +348,7 @@
             this.txtLastName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtLastName.Enabled = false;
             this.txtLastName.Location = new System.Drawing.Point(30, 132);
+            this.txtLastName.MaxLength = 30;
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(184, 22);
             this.txtLastName.TabIndex = 4;
@@ -380,6 +381,7 @@
             this.txtFirstName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtFirstName.Enabled = false;
             this.txtFirstName.Location = new System.Drawing.Point(291, 132);
+            this.txtFirstName.MaxLength = 30;
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(184, 22);
             this.txtFirstName.TabIndex = 22;

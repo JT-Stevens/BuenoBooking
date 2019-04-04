@@ -642,19 +642,7 @@ namespace Bueno_Bookings
             //hotel at least 2 times in the past.
             if (cboRoomNumber.Text.ToLower() != "no room" && cboRoomType.Text.ToLower() == "penthouse suite" && cboHotel.SelectedIndex > 0 && cboGuestId.Text.ToLower() != "no guest")
             {
-                DataRow[] guestBookings = dtBooking.Select($"guestId = '{cboGuestId.Text}'");
-
-                int hotelCount = 0;
-
-                foreach (DataRow row in guestBookings)
-                {
-                    if (Convert.ToInt16(dtRoom.Select($"RoomId = {row["roomId"]}")[0]["Hotel"]) == Convert.ToInt16(cboHotel.SelectedValue))
-                    {
-                        hotelCount++;
-                    }
-                }
-
-                if (hotelCount < 2)
+                if (Convert.ToInt16(GetSendData.GetScalarValue($"SELECT COUNT(*) FROM Booking INNER JOIN Room ON Booking.RoomID = Room.RoomID WHERE GuestID = '{cboGuestId.Text}' AND Hotel = {cboHotel.SelectedValue};")) < 2)
                 {
                     e.Cancel = true;
                     errorProvider1.SetError(cboRoomType, "Guest must have booked with us twice in the past to get Penthouse option");

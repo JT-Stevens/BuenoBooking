@@ -19,6 +19,8 @@ namespace Bueno_Bookings
         DataTable dtHotel;
         DataTable dtRoom;
 
+        
+
         int currentRecord = 0;
         bool addMode;
 
@@ -640,8 +642,7 @@ namespace Bueno_Bookings
             //hotel at least 2 times in the past.
             if (cboRoomNumber.Text.ToLower() != "no room" && cboRoomType.Text.ToLower() == "penthouse suite" && cboHotel.SelectedIndex > 0 && cboGuestId.Text.ToLower() != "no guest")
             {
-
-                var guestBookings = dtBooking.Select($"guestId = '{cboGuestId.Text}'");
+                DataRow[] guestBookings = dtBooking.Select($"guestId = '{cboGuestId.Text}'");
 
                 int hotelCount = 0;
 
@@ -658,8 +659,6 @@ namespace Bueno_Bookings
                     e.Cancel = true;
                     errorProvider1.SetError(cboRoomType, "Guest must have booked with us twice in the past to get Penthouse option");
                 }
-
-
             }
         }
 

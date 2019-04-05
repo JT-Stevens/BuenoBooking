@@ -19,8 +19,6 @@ namespace Bueno_Bookings
         DataTable dtHotel;
         DataTable dtRoom;
 
-        
-
         int currentRecord = 0;
         bool addMode;
 
@@ -37,6 +35,7 @@ namespace Bueno_Bookings
             {
                 ToggleControls(true);
 
+                LoadDependentForms();
                 LoadBookings();
                 PopulateField();
 
@@ -91,7 +90,6 @@ namespace Bueno_Bookings
             cboGuestId.DataSource = dtGuestDrop;
 
             cboGuestId.SelectedIndex = currentRecord;
-
         }
 
         private void FillGuestSuggestions()
@@ -210,17 +208,14 @@ namespace Bueno_Bookings
 
         private void LoadBookings()
         {
-            try
-            {
-                dtBooking = GetSendData.GetData("SELECT * FROM Booking");
-                dtGuest = GetSendData.GetData("SELECT * FROM Guest");
-                dtHotel = GetSendData.GetData("SELECT * FROM Hotel");
-                dtRoom = GetSendData.GetData("SELECT * FROM Room");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, ex.GetType().ToString());
-            }
+            dtBooking = GetSendData.GetData("SELECT * FROM Booking");
+        }
+
+        private void LoadDependentForms()
+        {
+            dtGuest = GetSendData.GetData("SELECT * FROM Guest");
+            dtHotel = GetSendData.GetData("SELECT * FROM Hotel");
+            dtRoom = GetSendData.GetData("SELECT * FROM Room");
         }
 
         private void PopulateField()
@@ -410,10 +405,28 @@ namespace Bueno_Bookings
 
                     parentForm.toolStripStatusLabel4.Text = "OK";
 
+                    UpdatePreferredStatus();
+
                     LoadBookings();
                     PopulateField();
 
                     addMode = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
+        }
+        
+        // Business Rule: If a guest has had 4 or more bookings with any hotel, they should automatically be given preferred status.
+        private void UpdatePreferredStatus()
+        {
+            try
+            {
+                if (Convert.ToInt32(GetSendData.GetScalarValue($"SELECT COUNT(*) FROM Booking WHERE GuestID = '{cboGuestId.Text}';")) == 4)
+                {
+                    GetSendData.SendData($"UPDATE guest SET Preferred = 1 WHERE GuestID = '{cboGuestId.Text}';");
                 }
             }
             catch (Exception ex)

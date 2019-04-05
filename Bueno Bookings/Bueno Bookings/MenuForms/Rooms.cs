@@ -241,6 +241,12 @@ namespace Bueno_Bookings
 
                 if (dialogResult == DialogResult.Yes)
                 {
+                    if (Convert.ToInt16(GetSendData.GetScalarValue($"SELECT COUNT(*) FROM Booking WHERE RoomId = {dtRoom.Rows[currentRecord]["RoomID"]}")) > 0)
+                    {
+                        MessageBox.Show("Cannot delete room that has records in booking.");
+                        return;
+                    }
+
                     if (GetSendData.SendData($"DELETE FROM Room WHERE RoomId = {dtRoom.Rows[currentRecord]["RoomID"]}") > 0)
                     {
                         MessageBox.Show("Record Deleted");

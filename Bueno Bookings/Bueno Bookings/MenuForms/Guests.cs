@@ -51,14 +51,7 @@ namespace Bueno_Bookings
 
         private void LoadGuest()
         {
-            try
-            {
                 dtGuest = GetSendData.GetData("SELECT * FROM Guest");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, ex.GetType().ToString());
-            }
         }
 
         private void PopulateField()
@@ -251,6 +244,12 @@ namespace Bueno_Bookings
 
                 if (dialogResult == DialogResult.Yes)
                 {
+                    if (Convert.ToInt16(GetSendData.GetScalarValue($"SELECT COUNT(*) FROM Booking WHERE Guestid = '{dtGuest.Rows[currentRecord]["GuestID"]}'")) > 0)
+                    {
+                        MessageBox.Show("Cannot delete guest who has bookings.");
+                        return;
+                    }
+
                     if (GetSendData.SendData($"DELETE FROM Guest WHERE GuestId = '{dtGuest.Rows[currentRecord]["GuestID"]}'") > 0)
                     {
                         MessageBox.Show("Record Deleted");

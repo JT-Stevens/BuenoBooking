@@ -19,6 +19,8 @@ namespace Bueno_Bookings
         DataTable dtHotel;
         DataTable dtRoom;
 
+        private Guests frmGuests;
+
         int currentRecord = 0;
         bool addMode;
 
@@ -339,7 +341,7 @@ namespace Bueno_Bookings
                 {
                     foreach (Control ctrl in gb.Controls)
                     {
-                        if (ctrl is TextBox || ctrl is MaskedTextBox || ctrl is Label)
+                        if (ctrl is TextBox || ctrl is MaskedTextBox)
                         {
                             ctrl.Text = string.Empty;
                         }
@@ -664,5 +666,29 @@ namespace Bueno_Bookings
         }
 
         #endregion
+        private void OpenForm(Form form)
+        {
+            if (parentForm.tabControl1.Contains(form))
+            {
+                parentForm.tabControl1.TabPages[form].Select();
+            }
+            else
+            {
+                parentForm.tabControl1.TabPages.Add(form);
+                form.Show();
+            }
+        }
+
+        private void btnAddGuest_Click(object sender, EventArgs e)
+        {
+            parentForm.addModeGuest = true;
+
+            if (frmGuests == null || frmGuests.IsDisposed)
+            {
+                frmGuests = new Guests(parentForm);
+            }
+
+            OpenForm(frmGuests);
+        }
     }
 }

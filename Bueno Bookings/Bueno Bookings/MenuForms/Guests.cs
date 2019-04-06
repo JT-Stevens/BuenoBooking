@@ -17,8 +17,10 @@ namespace Bueno_Bookings
         MainMenuForm parentForm;
         DataTable dtGuest;
 
-        int currentRecord = 0;
         bool addMode;
+
+        int currentRecord = 0;
+        //private Booking booking;
 
         public Guests(MainMenuForm p)
         {
@@ -29,6 +31,7 @@ namespace Bueno_Bookings
         #region Load Form
         private void Guests_Load(object sender, EventArgs e)
         {
+            addMode = parentForm.addModeGuest;
             ToggleControls(true);
 
             Dictionary<string, string> provinces = new Dictionary<string, string>
@@ -47,6 +50,11 @@ namespace Bueno_Bookings
 
             LoadGuest();
             PopulateField();
+
+            if (addMode)
+            {
+                btnAdd_Click(sender, e);
+            }
         }
 
         private void LoadGuest()
@@ -246,7 +254,7 @@ namespace Bueno_Bookings
                 {
                     if (Convert.ToInt16(GetSendData.GetScalarValue($"SELECT COUNT(*) FROM Booking WHERE Guestid = '{dtGuest.Rows[currentRecord]["GuestID"]}'")) > 0)
                     {
-                        MessageBox.Show("Cannot delete guest who has bookings.");
+                        MessageBox.Show("Cannot delete guest who has bookings.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
 

@@ -207,6 +207,7 @@
             this.tsbGuest.Name = "tsbGuest";
             this.tsbGuest.Size = new System.Drawing.Size(24, 24);
             this.tsbGuest.Text = "toolStripButton1";
+            this.tsbGuest.ToolTipText = "Guest";
             this.tsbGuest.Click += new System.EventHandler(this.MenuToolStripButton);
             // 
             // tsbRooms
@@ -217,6 +218,7 @@
             this.tsbRooms.Name = "tsbRooms";
             this.tsbRooms.Size = new System.Drawing.Size(24, 24);
             this.tsbRooms.Text = "toolStripButton2";
+            this.tsbRooms.ToolTipText = "Room";
             this.tsbRooms.Click += new System.EventHandler(this.MenuToolStripButton);
             // 
             // tsbBooking
@@ -227,6 +229,7 @@
             this.tsbBooking.Name = "tsbBooking";
             this.tsbBooking.Size = new System.Drawing.Size(24, 24);
             this.tsbBooking.Text = "toolStripButton3";
+            this.tsbBooking.ToolTipText = "Booking";
             this.tsbBooking.Click += new System.EventHandler(this.MenuToolStripButton);
             // 
             // toolStripSeparator1
@@ -315,9 +318,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton tsbBookingReport;
         private System.Windows.Forms.ToolStripButton tsbGuestReport;
-        private MdiTabControl.TabControl tabControl1;
         internal System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         internal System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        public MdiTabControl.TabControl tabControl1;
     }
 }
 

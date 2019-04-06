@@ -243,7 +243,7 @@ namespace Bueno_Bookings
                 {
                     if (Convert.ToInt16(GetSendData.GetScalarValue($"SELECT COUNT(*) FROM Booking WHERE RoomId = {dtRoom.Rows[currentRecord]["RoomID"]}")) > 0)
                     {
-                        MessageBox.Show("Cannot delete room that has records in booking.");
+                        MessageBox.Show("Cannot delete room that has records in booking.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
 
@@ -254,7 +254,6 @@ namespace Bueno_Bookings
                         currentRecord = 0;
 
                         LoadRoom();
-                        //LoadComboHotel();
                         PopulateField();
                     }
                     else

@@ -16,6 +16,8 @@ namespace Bueno_Bookings
         private Rooms frmRooms;
         private Booking frmBooking;
 
+        public bool addModeGuest;
+
         public MainMenuForm()
         {
             InitializeComponent();

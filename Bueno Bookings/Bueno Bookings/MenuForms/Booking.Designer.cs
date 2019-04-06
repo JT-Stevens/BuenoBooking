@@ -415,6 +415,7 @@
             this.btnAddGuest.Text = "This guest is not in our list. Add to list?";
             this.btnAddGuest.UseVisualStyleBackColor = true;
             this.btnAddGuest.Visible = false;
+            this.btnAddGuest.Click += new System.EventHandler(this.btnAddGuest_Click);
             // 
             // txtPhone
             // 
@@ -503,7 +504,6 @@
         private System.Windows.Forms.DateTimePicker dtpStartDate;
         private System.Windows.Forms.ComboBox cboRoomType;
         private System.Windows.Forms.DateTimePicker dtpEndDate;
-        private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -512,17 +512,18 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblTotalCharges;
         private System.Windows.Forms.CheckBox chkPreferred;
-        private System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cboGuestId;
         private System.Windows.Forms.Button btnAddGuest;
-        private System.Windows.Forms.MaskedTextBox txtPhone;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cboRoomNumber;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox cboHotel;
         private System.Windows.Forms.CheckBox chkRequiredParking;
+        public System.Windows.Forms.TextBox txtLastName;
+        public System.Windows.Forms.TextBox txtFirstName;
+        public System.Windows.Forms.MaskedTextBox txtPhone;
     }
 }

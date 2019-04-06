@@ -406,8 +406,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox txtFirstName;
-        private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.TextBox txtStreetAddress;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -434,6 +432,8 @@
         private System.Windows.Forms.Button btnFirst;
         private System.Windows.Forms.GroupBox grpNav;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.MaskedTextBox txtPhone;
+        public System.Windows.Forms.TextBox txtFirstName;
+        public System.Windows.Forms.TextBox txtLastName;
+        public System.Windows.Forms.MaskedTextBox txtPhone;
     }
 }

@@ -20,7 +20,6 @@ namespace Bueno_Bookings
         bool addMode;
 
         int currentRecord = 0;
-        //private Booking booking;
 
         public Guests(MainMenuForm p)
         {

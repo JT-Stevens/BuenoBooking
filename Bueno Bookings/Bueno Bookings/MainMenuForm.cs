@@ -15,8 +15,10 @@ namespace Bueno_Bookings
         private Guests frmGuests;
         private Rooms frmRooms;
         private Booking frmBooking;
+        private FormReport FrmReport;
 
         public bool addModeGuest;
+        public string formType;
 
         public MainMenuForm()
         {
@@ -118,6 +120,28 @@ namespace Bueno_Bookings
                 }
 
                 OpenForm(frmBooking);
+            }
+
+            if (stripItem.Name == "mnuBookingReport" || stripItem.Name == "tsbBookingReport")
+            {
+                if (FrmReport == null || FrmReport.IsDisposed)
+                {
+                    formType = "Bookings Report";
+                    FrmReport = new FormReport(this);
+                }
+
+                OpenForm(FrmReport);
+            }
+
+            if (stripItem.Name == "mnuGuestReport" || stripItem.Name == "tsbGuestReport")
+            {
+                if (FrmReport == null || FrmReport.IsDisposed)
+                {
+                    formType = "Guest Report";
+                    FrmReport = new FormReport(this);
+                }
+
+                OpenForm(FrmReport);
             }
         }
 
